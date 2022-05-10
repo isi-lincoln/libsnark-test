@@ -20,6 +20,19 @@ target_include_directories(
 )
 
 
+set(Boost_USE_STATIC_LIBS        ON)  # only find static libs
+set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
+set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+find_package(Boost 1.71.0 COMPONENTS format)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    add_executable(prover main.cpp)
+    target_link_libraries(prover ${Boost_LIBRARIES})
+endif()
+
+
 add_executable(
   prover
 
@@ -56,6 +69,7 @@ target_include_directories(
   ${DEPENDS_DIR}/libsnark
   ${DEPENDS_DIR}/libsnark/depends/libfqfft
 )
+
 
 
 
