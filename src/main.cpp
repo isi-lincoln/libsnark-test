@@ -20,6 +20,7 @@
 using namespace libsnark;
 using namespace libff;
 using namespace std;
+using boost::format;
 
 using std::vector;
 
@@ -316,8 +317,10 @@ int main(int argc, char *argv[]) {
 
     auto ints = bit_list_to_ints(result->get_digest(), 32);
     for (size_t i = 0; i < ints.size()-1; i++) {
-        std::cout << std::hex << ints[i] << std::endl;
-        myfile_hash << std::hex << ints[i];
+        //std::cout << std::hex << ints[i] << std::endl;
+        printf("%032d\n", ints[i]);
+        //myfile_hash << std::hex << ints[i];
+        myfile_hash << boost::format("%032d", ints[i]);
     }
     myfile_hash.close();
 
